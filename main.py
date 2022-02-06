@@ -1,3 +1,5 @@
+#uvicorn main:app --reload
+#mongod --dbpath db/
 from datetime import datetime, timedelta
 from typing import Optional
 
@@ -220,3 +222,4 @@ async def reset_password(reset_password_data: ResetPasswordData, current_user: U
         )
     new_password_hashed = pwd_context.hash(reset_password_data.new_password)
     users_db.find_one_and_update({"username":current_user.username}, { "$set":{"hashed_password": new_password_hashed}})
+
